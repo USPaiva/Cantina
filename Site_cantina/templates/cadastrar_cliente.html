@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Cliente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{{ url_for('static', filename='logos/logoMT.png') }}" alt="Logo" class="navbar-logo">
+    </nav>
+    <div class="container2">
+        <img src="{{ url_for('static', filename='logos/logoTM.png') }}" alt="Logo" class="logo">
+        <h1 class="title">Cadastrar Cliente</h1>
+        <p class="description">Insira os dados abaixo para criar uma nova conta</p>
+
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="input-group">
+                <label for="username" class="label">{{ form.username.label }}</label>
+                {{ form.username(class="input") }}
+            </div>
+            <div class="input-group">
+                <label for="email" class="label">{{ form.email.label }}</label>
+                {{ form.email(class="input") }}
+            </div>
+            <div class="input-group">
+                <label for="senha" class="label">{{ form.senha.label }}</label>
+                {{ form.senha(class="input", id="password") }}
+                <span id="togglePassword">Mostrar</span>
+            </div>
+            <div class="input-group">
+                <label for="confirmar_senha" class="label">{{ form.confirmar_senha.label }}</label>
+                {{ form.confirmar_senha(class="input", id="confirm_password") }}
+            </div>
+            <button type="submit" class="btn2 primary">{{ form.botao_confirmacao.label.text }}</button>
+        </form>
+
+        <a href="{{ url_for('index') }}" class="btn2 secondary">Já tenho uma conta</a>
+    </div>
+
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function (e) {
+            const password = document.getElementById('password');
+            if (password.type === 'password') {
+                password.type = 'text';
+                e.target.textContent = 'Ocultar';
+            } else {
+                password.type = 'password';
+                e.target.textContent = 'Mostrar';
+            }
+        });
+    </script>
+</body>
+</html>

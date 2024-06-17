@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Produto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{{ url_for('static', filename='logos/logoMT.png') }}" alt="Logo" class="navbar-logo">
+        <div class="navbar-buttons">
+            <span class="btn">Bem-vindo, {{ user.username }}!</span>
+            <button class="btn logout-btn"><a href="{{ url_for('dashboard_redirect') }}">Início</a></button>
+            <button class="btn logout-btn"><a href="{{ url_for('logout') }}">Logout</a></button>
+        </div>
+    </nav>
+    <div class="container3" id="product-registration">
+        <div class="product-registration">
+            <h2>Cadastrar Produto</h2>
+            <form method="POST" action="{{ url_for('cadastrar_produto') }}" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.nome.label }}<br>
+                    {{ form.nome(size=40) }}
+                    {% if form.nome.errors %}
+                        <ul>
+                            {% for error in form.nome.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.descricao.label }}<br>
+                    {{ form.descricao(size=45) }}
+                    {% if form.descricao.errors %}
+                        <ul>
+                            {% for error in form.descricao.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.valor_compra.label }}<br>
+                    {{ form.valor_compra(step=0.01) }}
+                    {% if form.valor_compra.errors %}
+                        <ul>
+                            {% for error in form.valor_compra.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.valor_venda.label }}<br>
+                    {{ form.valor_venda(step=0.01) }}
+                    {% if form.valor_venda.errors %}
+                        <ul>
+                            {% for error in form.valor_venda.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.quantidade.label }}<br>
+                    {{ form.quantidade() }}
+                    {% if form.quantidade.errors %}
+                        <ul>
+                            {% for error in form.quantidade.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.foto.label }}<br>
+                    {{ form.foto() }}
+                    {% if form.foto.errors %}
+                        <ul>
+                            {% for error in form.foto.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                {{ form.botao_confirmacao(class="btn") }}
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/cadastrar_produto.js') }}"></script>
+</body>
+</html>

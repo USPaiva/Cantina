@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.navbar {
+    width: 100%;
+    height: 60px; /* Define a altura fixa da barra de navegação */
+    padding: 0 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.navbar-logo {
+    height: 100%; /* Define a altura da logo para ocupar toda a altura da navbar */
+    width: auto; /* Mantém a proporção da imagem */
+    object-fit: cover;
+}
+
+.navbar-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar .btn {
+    margin-right: 20px; /* Ajusta o valor para mover os botões para a esquerda ou direita */
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 100px 16px 16px; /* Ajusta o padding para considerar a altura da navbar */
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 16px 16px; /* Ajusta o padding para considerar a altura da navbar */
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.admin-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+}
+
+.admin-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #dc2626;
+    color: white;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.admin-btn:hover {
+    background-color: #b71c1c;
+}
+
+@media (max-width: 768px) {
+    .admin-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar {
+        padding: 8px;
+    }
+
+    .navbar-buttons {
+        gap: 5px;
+    }
+
+    .navbar .btn {
+        margin-right: 10px;
+    }
+
+    .admin-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}

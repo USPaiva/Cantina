@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Estoque</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+    <!-- Link para Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{{ url_for('static', filename='logos/logoMT.png') }}" alt="Logo" class="navbar-logo">
+        <div class="navbar-buttons">
+            <button class="btn logout-btn"><a href="{{ url_for('dashboard_redirect') }}">Início</a></button>
+            <button class="btn logout-btn"><a href="{{ url_for('logout') }}">Logout</a></button>
+        </div>
+    </nav>
+    <div class="content">
+        <h1 class="title">Verificar Estoque</h1>
+        <table id="produto-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th>Valor de Compra</th>
+                    <th>Valor de Venda</th>
+                    <th>Descrição</th>
+                    <th>Foto</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in produtos %}
+                <tr>
+                    <td>{{ produto.id }}</td>
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.quantidade }}</td>
+                    <td>{{ produto.valor_compra }}</td>
+                    <td>{{ produto.valor_venda }}</td>
+                    <td>{{ produto.descricao }}</td>
+                    <td><img src="{{ url_for('static', filename=produto.foto) }}" alt="Foto do Produto" width="50"></td>
+                    <td>
+                        <a href="{{ url_for('editar_produto', id=produto.id) }}" class="btn">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

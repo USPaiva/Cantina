@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Pedido</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{{ url_for('static', filename='logos/logoMT.png') }}" alt="Logo" class="navbar-logo">
+        <div class="navbar-buttons">
+            <span>Bem-vindo, {{ user.username }}!</span>
+            <form method="GET" action="{{ url_for('logout') }}">
+                <button type="submit" class="btn logout-btn">Logout</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container2">
+        <h2>Finalizar Pedido</h2>
+        <div class="cart">
+            <h3>Itens no Carrinho</h3>
+            <div class="cart-items"></div>
+            <p class="total-value">Valor Total: R$ {{ total }}</p> <!-- Exibir o valor total -->
+        </div>
+        <!-- Botão para voltar para a tela de vitrine -->
+        <a href="{{ url_for('pedir', user=user) }}" class="btn2 secondary">Voltar para a Vitrine</a>
+        <!-- Novo botão para visualizar pedidos -->
+        <a href="{{ url_for('visualizar_pedido') }}" class="btn2 secondary">Visualizar Pedidos</a>
+        <form id="finalize-order-form" method="POST" action="{{ url_for('finalizar_pedido') }}">
+            <div class="input-group">
+                <label class="label" for="pickup-date">Data de Retirada</label>
+                <input class="input" type="date" id="pickup-date" name="pickup-date" required>
+            </div>
+            <div class="input-group">
+                <label class="label" for="pickup-time">Hora de Retirada</label>
+                <input class="input" type="time" id="pickup-time" name="pickup-time" required>
+            </div>
+            <div class="input-group">
+                <label class="label" for="payment-method">Método de Pagamento</label>
+                <select class="input" id="payment-method" name="payment-method" required>
+                    <option value="">Selecione um método</option>
+                    {% for payment_type in payment_types %}
+                    <option value="{{ payment_type.id }}">{{ payment_type.payment_type }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button class="btn2 primary" type="submit">Confirmar Pedido</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/finalize_order.js') }}"></script>
+</body>
+</html>

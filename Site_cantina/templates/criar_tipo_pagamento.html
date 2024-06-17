@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Tipo de Pagamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{{ url_for('static', filename='logos/logoMT.png') }}" alt="Logo" class="navbar-logo">
+        <div class="navbar-buttons">
+            <div class="navbar-buttons">
+                <span class="btn">Bem-vindo, {{ user.username }}!</span>
+                <button class="btn logout-btn"><a href="{{ url_for('dashboard_redirect') }}">Início</a></button>
+                <button class="btn logout-btn"><a href="{{ url_for('logout') }}">Logout</a></button>
+            </div>
+        </div>
+    </nav>
+    <div class="container2">
+        <h2>Criar Novo Tipo de Pagamento</h2>
+        <form id="create-payment-type-form" method="POST" action="{{ url_for('criar_tipo_pagamento') }}">
+            <div class="input-group">
+                <label class="label" for="payment-type">Tipo de Pagamento</label>
+                <input class="input" type="text" id="payment-type" name="payment-type" required>
+            </div>
+            <button class="btn2 primary" type="submit">Criar Tipo de Pagamento</button>
+        </form>
+
+        <h2>Tipos de Pagamento Existentes</h2>
+        <table class="payment-types-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tipo de Pagamento</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment_type in payment_types %}
+                <tr>
+                    <td>{{ payment_type.id }}</td>
+                    <td>{{ payment_type.payment_type }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('remover_tipo_pagamento', payment_type_id=payment_type.id) }}">
+                            <button class="btn2 secondary" type="submit">Remover</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{{ url_for('static', filename='js/create_payment_type.js') }}"></script>
+</body>
+</html>

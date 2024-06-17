@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção de Comidas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{{ url_for('static', filename='logos/logoMT.png') }}" alt="Logo" class="navbar-logo">
+        <div class="navbar-buttons">
+            <span class="btn">Bem-vindo, {{ user.username }}!</span>
+            <button class="btn logout-btn"><a href="{{ url_for('dashboard_redirect') }}">Início</a></button>
+            <button class="btn logout-btn"><a href="{{ url_for('logout') }}">Logout</a></button>
+        </div>
+    </nav>
+    <div class="content" id="food-selection">
+        <div class="food-selection">
+            <h2>Selecione suas Comidas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Imagem</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th> <!-- Adicionada coluna para quantidade -->
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in produtos %}
+                    <tr>
+                        <td><img src="{{ url_for('static', filename=produto.foto) }}" alt="{{ produto.nome }}" class="product-image"></td>
+                        <td>{{ produto.nome }}</td>
+                        <td>{{ produto.descricao }}</td>
+                        <td>{{ produto.valor_venda }}</td>
+                        <td>{{ produto.quantidade }}</td> <!-- Exibir quantidade -->
+                        <td>
+                            <button class="btn add-to-cart" data-id="{{ produto.id }}">Adicionar ao Carrinho</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="cart">
+            <h2>Seu Carrinho</h2>
+            <div class="cart-items"></div>
+            <p class="total-value">Valor Total: R$ 0.00</p> <!-- Elemento para exibir o valor total -->
+            <button class="btn checkout">Finalizar Pedido</button> <!-- Botão para finalizar pedido -->
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/vitrine.js') }}"></script>
+    <meta name="current-user" content="{{ current_user.username }}">
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Administrador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/admin.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{{ url_for('static', filename='logos/logoMT.png') }}" alt="Logo" class="navbar-logo">
+        <div class="navbar-buttons">
+            <span>Bem-vindo, {{ user.username }}!</span>
+            <form method="GET" action="{{ url_for('logout') }}">
+                <button type="submit" class="btn logout-btn">Logout</button>
+            </form>
+        </div>
+    </nav>
+    <div class="admin-container">
+        <h1>Painel do Administrador</h1>
+        <div class="admin-buttons">
+            <a href="{{ url_for('visualizar_pedido') }}" class="btn admin-btn">Visualizar Pedidos</a>
+            <a href="{{ url_for('cadastrar_produto') }}" class="btn admin-btn">Cadastrar Produto</a>
+            <a href="{{ url_for('cadastrar_cliente') }}" class="btn admin-btn">Cadastrar Cliente</a>
+            <a href="{{ url_for('pedir', user=user.username) }}" class="btn admin-btn">Vitrine</a>
+            <a href="{{ url_for('verificar_estoque') }}" class="btn admin-btn">Verificar Estoque</a>
+        </div>
+    </div>
+</body>
+</html>

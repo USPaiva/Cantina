@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Pedidos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+    <style>
+        .input-group {
+            position: relative;
+        }
+        #togglePassword {
+            position: absolute;
+            right: 10px;
+            top: 38px;
+            transform: translateY(-60%);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{{ url_for('static', filename='logos/logoMT.png') }}" alt="Logo" class="navbar-logo">
+    </nav>
+    <div class="container2">
+        <img src="{{ url_for('static', filename='logos/logoTM.png') }}" alt="Logo" class="logo">
+        <h1 class="title">Gestor de Pedidos</h1>
+        <p class="description">Insira seu usuário e senha para se conectar</p>
+
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="input-group">
+                <label for="username" class="label">{{ form.username.label }}</label>
+                {{ form.username(class="input") }}
+            </div>
+            <div class="input-group">
+                <label for="senha" class="label">{{ form.senha.label }}</label>
+                {{ form.senha(class="input", id="password") }}
+                <span id="togglePassword">Mostrar</span>
+            </div>
+            <button type="submit" class="btn2 primary">{{ form.botao_confirmacao.label.text }}</button>
+        </form>
+
+        <a href="{{ url_for('cadastrar_cliente') }}" class="btn2 secondary">Não tenho uma conta</a>
+    </div>
+
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function (e) {
+            const password = document.getElementById('password');
+            if (password.type === 'password') {
+                password.type = 'text';
+                e.target.textContent = 'Ocultar';
+            } else {
+                password.type = 'password';
+                e.target.textContent = 'Mostrar';
+            }
+        });
+    </script>
+</body>
+</html>

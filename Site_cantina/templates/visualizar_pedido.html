@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Pedidos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <img src="{{ url_for('static', filename='logos/logoMT.png') }}" alt="Logo" class="navbar-logo">
+        <div class="navbar-buttons">
+            <span class="btn">Bem-vindo, {{ user.username }}!</span>
+            <button class="btn logout-btn"><a href="{{ url_for('dashboard_redirect') }}">Início</a></button>
+            <button class="btn logout-btn"><a href="{{ url_for('logout') }}">Logout</a></button>
+        </div>
+    </nav>
+
+    <div class="container3">
+        <h1>Meus Pedidos</h1>
+        {% for pedido in pedidos %}
+        <div class="pedido">
+            <h2>Pedido #{{ pedido.pedido_id }}</h2>
+            <p>Data do Pedido: {{ pedido.data }}</p>
+            <p>Data de Retirada: {{ pedido.retirada }}</p>
+            <p>Valor Total: R$ {{ pedido.valor }}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Preço Unitário</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in pedido.produtos %}
+                    <tr>
+                        <td>{{ produto.nome }}</td>
+                        <td>{{ produto.quantidade }}</td>
+                        <td>R$ {{ produto.valor_venda }}</td>
+                        <td>R$ {{ produto.subtotal }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
