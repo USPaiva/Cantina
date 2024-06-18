@@ -76,7 +76,8 @@ def editar_produto(id):
             foto = form.foto.data
             filename = secure_filename(foto.filename)
             foto.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            produto.foto = filename
+            relative_path = os.path.join('produtos', filename).replace("\\",'/')
+            produto.foto = relative_path
         
         try:
             database.session.commit()
